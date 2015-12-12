@@ -1,0 +1,4 @@
+--T_inf=50.0
+--nsamples=1000
+--ngrid=21
+--obs_cov_type=matrix
