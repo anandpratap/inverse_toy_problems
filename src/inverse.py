@@ -8,7 +8,7 @@ from objectives import TestObjective, BayesianObjective
 class InverseSolver(object):
     def __init__(self, eqn):
         self.eqn = eqn
-        self.maxiter = 40
+        self.maxiter = 100
         self.dostats = False
         self.algo = "bfgs"
         self.stepsize = 0.1
@@ -29,7 +29,7 @@ class InverseSolver(object):
                 print "\rPrior samples %i of %i"%(i+1, nsamples),
                 i = i + 1
             else:
-                heat.T[:] = np.ones_like(heat.T)*heat.T_inf
+                self.eqn.T[:] = np.ones_like(self.eqn.T)*self.eqn.T_inf
         print "\n"
         self.eqn.beta[:] = 1.0
         return beta_samples_prior, T_samples_prior
@@ -52,7 +52,7 @@ class InverseSolver(object):
                 print "\rPosterior samples %i of %i"%(i+1, nsamples),
                 i = i + 1
             else:
-                heat.T[:] = np.ones_like(heat.T)*heat.T_inf
+                self.eqn.T[:] = np.ones_like(self.eqn.T)*self.eqn.T_inf
         print "\n"
         self.eqn.beta[:] = beta_map[:]
         return beta_samples_post, T_samples_post
