@@ -15,7 +15,7 @@ from mcmc import MCMCSampler
 if __name__ == "__main__":
     ngrid = 21
     T_inf = 50.0
-    obs_cov_type = "scalar"
+    obs_cov_type = "matrix"
     nsamples = 1000
     # generate observational data
     T_samples = np.zeros([nsamples, ngrid])
@@ -71,5 +71,6 @@ if __name__ == "__main__":
     data = data.astype(np.float64)
     sigma_obsv = np.ones_like(beta_map)*sigma_obs
     sigma_priorv = np.ones_like(beta_map)*sigma_prior
+    np.savetxt("mcmc_input_cov.dat", Cov)
     np.savetxt('mcmc_input.dat', np.c_[data, np.sqrt(np.diag(Cov)), beta_prior, sigma_priorv, beta_map])
 
